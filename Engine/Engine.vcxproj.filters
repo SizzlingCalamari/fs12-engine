@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Wrappers">
+      <UniqueIdentifier>{8118af68-3b08-4ae9-bc8d-73761d7c27fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Wrappers\Header Files">
+      <UniqueIdentifier>{2ed9af8a-33fa-463e-8434-05d0bb34e5b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Wrappers\Source Files">
+      <UniqueIdentifier>{cfded329-68dc-46fb-bd76-b611f309fb15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Messaging">
+      <UniqueIdentifier>{22ff98e7-cf3d-4968-b519-585dfe8b9ee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{5af6acbb-f3e0-4276-95f0-41ab78dbe98e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameState">
+      <UniqueIdentifier>{e4a133c3-30c2-4cb1-8f88-ac4f8bb4fba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{075c3cf6-f0ca-4f65-9f18-4c76448593c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameState\Header Files">
+      <UniqueIdentifier>{e30220ec-92cf-41f1-a8e9-a6fd54a51059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameState\Source Files">
+      <UniqueIdentifier>{a528f243-f5e2-4219-80b3-ab35871fcea9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WinMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\AnimationManager.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\TextureManager.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\CSGD_FModManager.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\Direct3D.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\Input.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\ObjectManager.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Messaging\Event.cpp">
+      <Filter>Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Messaging\EventSystem.cpp">
+      <Filter>Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\BitmapFont.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\SGD_Math.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Helper\BaseShader.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Helper\Camera.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Helper\Mesh.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\AnimationManager.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\CSGD_FModManager.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\Direct3D.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\Input.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\ObjectManager.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\TextureManager.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Messaging\Event.h">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Messaging\EventSystem.h">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Messaging\Listener.h">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\Bitmapfont.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\SGD_Math.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Helper\BaseShader.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Helper\Camera.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Helper\Mesh.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Helper\Profile.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameState\BaseState.h">
+      <Filter>GameState\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
