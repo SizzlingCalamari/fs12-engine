@@ -5,6 +5,7 @@ To implement:
 - Physics Engine (BIG TODO)
 - Camera system
 - Get rid of FMOD and use another Sound API
+- Multi-Threading Wrapper
 
 To change:
 - Shader implementation
@@ -21,3 +22,6 @@ To implement:
 - Item shop
 
 To change:
+
+
+Design Ideas:
