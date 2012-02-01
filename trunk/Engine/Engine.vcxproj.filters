@@ -146,5 +146,8 @@
     <ClInclude Include="Source\GameState\BaseState.h">
       <Filter>GameState\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Wrapper\XAudio.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
