@@ -92,6 +92,7 @@
     <ClCompile Include="Source\Wrapper\ObjectManager.cpp" />
     <ClCompile Include="Source\Wrapper\SGD_Math.cpp" />
     <ClCompile Include="Source\Wrapper\TextureManager.cpp" />
+    <ClCompile Include="Source\Wrapper\XAudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h" />

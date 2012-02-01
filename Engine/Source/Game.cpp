@@ -14,6 +14,8 @@ Game::Game()
 	SFXVolume = 1.0f;
 	musicVolume = 1.0f;
 
+	ZeroMemory(&audioBuffer, sizeof(XAUDIO2_BUFFER));
+
 	isWindowed = true;
 
 	FPSTimeStamp = GetTickCount();
@@ -35,6 +37,7 @@ Game* Game::GetInstance()
 
 void Game::Initialize(HWND hwnd, HINSTANCE hInstance, int _windowWidth, int _windowHeight, bool _isWindowed, bool isVSync)
 {
+	XAud = XAudio::GetInstance();
 	D3D = Direct3D::GetInstance();
 	textureManager = TextureManager::GetInstance();
 	input = Input::GetInstance();
@@ -42,10 +45,12 @@ void Game::Initialize(HWND hwnd, HINSTANCE hInstance, int _windowWidth, int _win
 	windowWidth = _windowWidth;
 	windowHeight = _windowHeight;
 
+	XAud->InitXAudioDevice(XAud);
 	D3D->InitD3D(hwnd, windowWidth, windowHeight);
 
 	gameObj.Init();
 	gameObj.SetTexture(textureManager->LoadTexture("Resource\\Texture\\jeep.png"));
+	XAud->OpenFile(&audioBuffer, "Resource\\Sounds\\Avicii - Levels.wav");
 
 	FPSTimeStamp = GetTickCount();
 	previousTimeStamp = GetTickCount();
@@ -69,6 +74,12 @@ bool Game::Input()
 	if(input->IsKeyDown('Q'))
 		return false;
 
+	if(input->IsKeyDown('P'))
+		XAud->PlaySoundA();
+
+	if(input->IsKeyDown('S'))
+		XAud->StopSound();
+
 	return true;
 }
 
@@ -90,7 +101,13 @@ void Game::Render()
 }
 
 void Game::Shutdown()
-{
+{	
+	if(XAud)
+	{
+		XAud->Shutdown();
+		XAud = NULL;
+	}
+
 	if(textureManager)
 	{
 		textureManager->Shutdown();

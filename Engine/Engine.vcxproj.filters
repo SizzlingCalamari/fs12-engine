@@ -90,6 +90,9 @@
     <ClCompile Include="Source\Helper\Mesh.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Wrapper\XAudio.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h">
