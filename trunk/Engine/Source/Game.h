@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include "Wrapper\Direct3D.h"
+#include "Wrapper\XAudio.h"
+#include "xaudio2.h"
 #include "GameObject\GameObject.h"
 #include <vector>
 
@@ -19,6 +21,9 @@ class Game
 private:
 	//Wrappers
 	Direct3D*			D3D;
+	XAudio*				XAud;
+	XAUDIO2_BUFFER		audioBuffer;
+
 	TextureManager*		textureManager;
 	Input*				input;
 	GameObject			gameObj;
