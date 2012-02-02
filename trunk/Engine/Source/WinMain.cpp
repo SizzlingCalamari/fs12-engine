@@ -7,12 +7,18 @@
 
 #include "Game.h"
 #include "Wrapper\Input.h"
+#include <fstream>
+#include <sstream>
+
+using std::fstream;
+using std::istringstream;
+using std::string;
 
 const char* g_szWINDOW_CLASS_NAME	= "SGDWindowClass";	
 
 const char* g_szWINDOW_TITLE		= "MEDUSA";
-const int	g_nWINDOW_WIDTH			= 800;				
-const int	g_nWINDOW_HEIGHT		= 600;				
+int	g_nWINDOW_WIDTH			= 800;				
+int	g_nWINDOW_HEIGHT		= 600;				
 
 #ifdef _DEBUG
 	#include <iostream>
@@ -22,6 +28,8 @@ const int	g_nWINDOW_HEIGHT		= 600;
 	#pragma comment(linker, "/SUBSYSTEM:Windows")
 	const BOOL	g_bIS_WINDOWED			= FALSE;
 #endif
+
+void LoadStartupSettings();
 
 //	Handler function that writes out a dump file
 LONG WINAPI Handler(_EXCEPTION_POINTERS * exPointers)
@@ -284,6 +292,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	////////////////////////////////////////////////////////////////////////
 
+	LoadStartupSettings();
+
 	//	Register the window class
 	if (!RegisterWindowClass(hInstance))
 		return 0;
@@ -334,4 +344,27 @@ int main()
 	int msg = WinMain(GetModuleHandle(NULL), NULL, GetCommandLine(), SW_SHOWDEFAULT);
 
 	return 0;
+}
+
+void LoadStartupSettings()
+{
+	std::fstream istr("startup.ini", std::ios_base::in);
+	if(!istr)
+		return;
+
+	char line[256];
+
+	while( istr.getline(line,256) )
+	{
+		istringstream newLine(line, istringstream::in);
+
+		string firstWord;
+
+		newLine >> firstWord;
+
+		if(firstWord == "width")
+			newLine >> g_nWINDOW_WIDTH;
+		else if(firstWord == "height")
+			newLine >> g_nWINDOW_HEIGHT;
+	}
 }
