@@ -4,12 +4,14 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <map>
+#include <vector>
 
 class TextureManager
 {
 public:
 	static TextureManager* GetInstance();
-	IDirect3DTexture9* LoadTexture(LPCSTR fileName);
+	int LoadTexture(LPCSTR fileName);
+	IDirect3DTexture9* GetTexture(int _id);
 	void Shutdown();
 
 private:
@@ -19,8 +21,10 @@ private:
 	TextureManager& operator=(const TextureManager&);
 
 	~TextureManager(){};
-
-	std::map<LPCSTR, IDirect3DTexture9*> imagesMap;
+	
+	// holds a string with the filename and an int to index into our texture array
+	std::map<LPCSTR, int> imagesMap;
+	std::vector<IDirect3DTexture9*> textures;
 };
 
 #endif

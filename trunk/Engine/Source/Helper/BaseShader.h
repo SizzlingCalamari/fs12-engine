@@ -4,6 +4,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
+#include "..\Wrapper\TextureManager.h"
 #include "Camera.h"
 
 class Mesh;
@@ -14,7 +15,7 @@ public:
 	static BaseShader* GetInstance();
 
 	void InitShader(LPCSTR _fileName);
-	void Render(D3DXMATRIX &_matrix, IDirect3DTexture9 *_texture, Mesh &mesh);
+	void Render(D3DXMATRIX &_matrix,  int textureID, Mesh &mesh);
 	void ShutdownShader();
 
 private:

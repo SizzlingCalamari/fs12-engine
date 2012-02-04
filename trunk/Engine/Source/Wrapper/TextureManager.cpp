@@ -1,16 +1,15 @@
 #include "TextureManager.h"
 #include "Direct3D.h"
 
-
 TextureManager* TextureManager::GetInstance()
 {
 	static TextureManager instance;
 	return &instance;
 }
 
-IDirect3DTexture9* TextureManager::LoadTexture(LPCSTR fileName)
+int TextureManager::LoadTexture(LPCSTR fileName)
 {
-	std::map<LPCSTR, IDirect3DTexture9*>::iterator it; 
+	std::map<LPCSTR, int>::iterator it; 
 	
 	
 	it = imagesMap.find(fileName);
@@ -19,31 +18,35 @@ IDirect3DTexture9* TextureManager::LoadTexture(LPCSTR fileName)
 	{
 	    IDirect3DTexture9* texture;
 		D3DXCreateTextureFromFile(Direct3D::GetInstance()->GetDevice(), fileName, &texture);
-		imagesMap.insert(std::map<LPCSTR, IDirect3DTexture9*>::value_type(fileName, texture));
 
-		return texture; 
+		imagesMap.insert(std::map<LPCSTR, int>::value_type(fileName, textures.size()));
+		textures.push_back(texture);
+
+		return textures.size()-1; 
 	}else
 		return it->second;
 
 	return NULL;
 }
 
+IDirect3DTexture9* TextureManager::GetTexture(int _id)
+{
+	return textures[_id];
+}
+
 void TextureManager::Shutdown()
 {
-	std::map<LPCSTR, IDirect3DTexture9*>::iterator it;
-
-	it = imagesMap.begin();
-
-	while(it != imagesMap.end())
+	
+	for(unsigned int i = 0; i<textures.size(); ++i)
 	{
-		if(it->second)
+		if(textures[i])
 		{
-			it->second->Release();
-			it->second = NULL;
+			textures[i]->Release();
+			textures[i] = NULL;
 		}
-
-		it++;
 	}
+
+	textures.clear();
 
 	imagesMap.clear();
 }

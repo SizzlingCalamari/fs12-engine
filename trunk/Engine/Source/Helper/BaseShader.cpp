@@ -40,7 +40,7 @@ void BaseShader::InitShader(LPCSTR _fileName)
 	}
 }
 
-void BaseShader::Render(D3DXMATRIX &_matrix, IDirect3DTexture9 *_texture, Mesh &mesh)
+void BaseShader::Render(D3DXMATRIX &_matrix, int textureID, Mesh &mesh)
 {
 	D3DXCOLOR diffuseLight = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	D3DXVECTOR3 lightPosition = D3DXVECTOR3(0.0f, 0.0f, -10.0f);
@@ -60,7 +60,7 @@ void BaseShader::Render(D3DXMATRIX &_matrix, IDirect3DTexture9 *_texture, Mesh &
 				effect->SetValue("gDiffuseLight", &diffuseLight, sizeof(D3DXCOLOR));
 				effect->SetValue("gLightPosition", &lightPosition, sizeof(D3DXVECTOR3));
 
-				effect->SetTexture("tex1", _texture);
+				effect->SetTexture("tex1", TextureManager::GetInstance()->GetTexture(textureID));
 				effect->SetBool("hasTexture", true);
 				
 				effect->CommitChanges();
