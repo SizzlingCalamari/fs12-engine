@@ -9,14 +9,13 @@ public:
 	GameObject();
 	~GameObject();
 
-	void SetTexture(IDirect3DTexture9* _texture) { texture = _texture; }
+	void SetTextureID(int _textureID) { textureID = _textureID; }
 	
 	void Init();
 	void Update(float _dt);
 	void Render();
 
 private:
-	IDirect3DTexture9	*texture;
 	float				speed;
 	float				width;
 	float				height;
@@ -27,6 +26,7 @@ private:
 
 	//Required for drawing
 	Mesh				mesh;
+	int					textureID;
 };
 
 #endif

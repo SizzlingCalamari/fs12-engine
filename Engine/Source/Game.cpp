@@ -49,7 +49,7 @@ void Game::Initialize(HWND hwnd, HINSTANCE hInstance, int _windowWidth, int _win
 	D3D->InitD3D(hwnd, windowWidth, windowHeight);
 
 	gameObj.Init();
-	gameObj.SetTexture(textureManager->LoadTexture("Resource\\Texture\\jeep.png"));
+	gameObj.SetTextureID(textureManager->LoadTexture("Resource\\Texture\\jeep.png"));
 	XAud->OpenFile(&audioBuffer, "Resource\\Sounds\\Avicii - Levels.wav");
 
 	FPSTimeStamp = GetTickCount();

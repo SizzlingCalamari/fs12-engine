@@ -32,7 +32,7 @@ void GameObject::Render()
 
 	D3DXMatrixRotationY(&matrix, D3DXToRadian(angle));
 
-	BaseShader::GetInstance()->Render(matrix, texture, mesh);
+	BaseShader::GetInstance()->Render(matrix, textureID, mesh);
 }
 
 void GameObject::Update(float _dt)
