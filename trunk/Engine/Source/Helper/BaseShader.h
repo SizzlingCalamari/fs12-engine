@@ -7,7 +7,7 @@
 #include "..\Wrapper\TextureManager.h"
 #include "Camera.h"
 
-class Mesh;
+class Model;
 
 class BaseShader
 {
@@ -15,7 +15,7 @@ public:
 	static BaseShader* GetInstance();
 
 	void InitShader(LPCSTR _fileName);
-	void Render(D3DXMATRIX &_matrix,  int textureID, Mesh &mesh);
+	void Render(D3DXMATRIX &_matrix, Model *model);
 	void ShutdownShader();
 
 private:

@@ -1,6 +1,7 @@
 #include "BaseShader.h"
 #include "..\Wrapper\Direct3D.h"
 
+#include "Model.h"
 #include "Mesh.h"
 
 BaseShader::BaseShader()
@@ -16,7 +17,7 @@ BaseShader::BaseShader()
 	}
 
 	myCamera.BuildPerspective(D3DX_PI/3, (float)(800/600), 0.1f, 1000.0f);
-	myCamera.SetViewPosition(0.0f, 0.0f, -50.0f);
+	myCamera.SetViewPosition(0.0f, 0.0f, -300.0f);
 }
 
 BaseShader::~BaseShader()
@@ -40,10 +41,10 @@ void BaseShader::InitShader(LPCSTR _fileName)
 	}
 }
 
-void BaseShader::Render(D3DXMATRIX &_matrix, int textureID, Mesh &mesh)
+void BaseShader::Render(D3DXMATRIX &_matrix, Model *model)
 {
-	D3DXCOLOR diffuseLight = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	D3DXVECTOR3 lightPosition = D3DXVECTOR3(0.0f, 0.0f, -10.0f);
+	D3DXCOLOR diffuseLight = D3DXCOLOR(1.0f, 1.0f,1.0f, 1.0f);
+	D3DXVECTOR3 lightPosition = D3DXVECTOR3(0.0f, 0.0f, -500.0f);
 
 	if(effect)
 	{
@@ -60,16 +61,18 @@ void BaseShader::Render(D3DXMATRIX &_matrix, int textureID, Mesh &mesh)
 				effect->SetValue("gDiffuseLight", &diffuseLight, sizeof(D3DXCOLOR));
 				effect->SetValue("gLightPosition", &lightPosition, sizeof(D3DXVECTOR3));
 
-				effect->SetTexture("tex1", TextureManager::GetInstance()->GetTexture(textureID));
-				effect->SetBool("hasTexture", true);
+				//effect->SetTexture("tex1", TextureManager::GetInstance()->GetTexture(textureID));
+				effect->SetBool("hasTexture", false);
 				
 				effect->CommitChanges();
 
-				Direct3D::GetInstance()->GetDevice()->SetStreamSource(0, mesh.GetVertexBuffer(), 0, sizeof(TextureVertex));
-				Direct3D::GetInstance()->GetDevice()->SetIndices(mesh.GetIndexBuffer());
-				Direct3D::GetInstance()->GetDevice()->SetVertexDeclaration(mesh.GetVertexDeclaration());
 
-				Direct3D::GetInstance()->GetDevice()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+				Direct3D::GetInstance()->GetDevice()->SetStreamSource(0, model->GetMesh(0)->GetVertexBuffer(), 0, sizeof(VertexNormalTexture));
+				//Direct3D::GetInstance()->GetDevice()->SetIndices(model->GetMesh(0)->GetIndexBuffer());
+				Direct3D::GetInstance()->GetDevice()->SetVertexDeclaration(model->GetMesh(0)->GetVertexDeclaration());
+
+				Direct3D::GetInstance()->GetDevice()->DrawPrimitive(D3DPT_TRIANGLELIST, 0, model->GetMesh(0)->GetNumVerts());
 			}
 			effect->EndPass();
 		}

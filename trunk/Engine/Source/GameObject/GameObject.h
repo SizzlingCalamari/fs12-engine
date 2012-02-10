@@ -1,15 +1,13 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "..\Helper\Mesh.h"
+#include "..\Helper\Model.h"
 
 class GameObject
 {
 public:
 	GameObject();
 	~GameObject();
-
-	void SetTextureID(int _textureID) { textureID = _textureID; }
 	
 	void Init();
 	void Update(float _dt);
@@ -25,8 +23,10 @@ private:
 	D3DXVECTOR3			position;
 
 	//Required for drawing
-	Mesh				mesh;
-	int					textureID;
+	Model*				model;
+	
+	//only for testing, remove later
+	int					texID;
 };
 
 #endif

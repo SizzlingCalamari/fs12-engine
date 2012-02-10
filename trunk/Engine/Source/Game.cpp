@@ -2,7 +2,9 @@
 #include <algorithm>
 #include <fstream>
 #include "Wrapper\TextureManager.h"
+#include "Wrapper\ModelManager.h"
 #include "Wrapper\Input.h"
+#include "GameObject\GameObject.h"
 
 #ifdef _DEBUG
 #include <iostream>
@@ -39,6 +41,7 @@ void Game::Initialize(HWND hwnd, HINSTANCE hInstance, int _windowWidth, int _win
 {
 	XAud = XAudio::GetInstance();
 	D3D = Direct3D::GetInstance();
+	modelManager = ModelManager::GetInstance();
 	textureManager = TextureManager::GetInstance();
 	input = Input::GetInstance();
 
@@ -48,9 +51,9 @@ void Game::Initialize(HWND hwnd, HINSTANCE hInstance, int _windowWidth, int _win
 	XAud->InitXAudioDevice(XAud);
 	D3D->InitD3D(hwnd, windowWidth, windowHeight);
 
-	gameObj.Init();
-	gameObj.SetTextureID(textureManager->LoadTexture("Resource\\Texture\\jeep.png"));
 	XAud->OpenFile(&audioBuffer, "Resource\\Sounds\\Avicii - Levels.wav");
+
+	gameObj = new GameObject();
 
 	FPSTimeStamp = GetTickCount();
 	previousTimeStamp = GetTickCount();
@@ -94,18 +97,24 @@ void Game::Update()
 void Game::Render()
 {
 	D3D->BeginDraw();
-
-	gameObj.Render();
-
+	gameObj->Render();
 	D3D->EndDraw();
 }
 
 void Game::Shutdown()
 {	
+	delete gameObj;
+
 	if(XAud)
 	{
 		XAud->Shutdown();
 		XAud = NULL;
+	}
+
+	if(modelManager)
+	{
+		modelManager->Shutdown();
+		modelManager = NULL;
 	}
 
 	if(textureManager)
