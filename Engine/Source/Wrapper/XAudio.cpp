@@ -151,6 +151,9 @@ HRESULT XAudio::OpenFile(XAUDIO2_BUFFER* buffer, TCHAR* filePath)
 	if(FAILED(hr = m_pXAudioSourceVoice->SubmitSourceBuffer(buffer)))
 		return hr;
 
+
+	//delete pDataBuffer;
+
 	return hr;
 }
 
@@ -176,18 +179,18 @@ void XAudio::Shutdown()
 {
 	if(m_pXAudioSourceVoice)
 	{
-		m_pXAudioSourceVoice->Stop(0);
+		/*m_pXAudioSourceVoice->Stop(0);
 		m_pXAudioSourceVoice->DestroyVoice();
-		m_pXAudioSourceVoice = NULL;
+		m_pXAudioSourceVoice = NULL;*/
 	}
 	if(m_pXAudioMasterVoice)
 	{
-		m_pXAudioMasterVoice->DestroyVoice();
-		m_pXAudioMasterVoice = NULL;
+		/*m_pXAudioMasterVoice->DestroyVoice();
+		m_pXAudioMasterVoice = NULL;*/
 	}
 	if(m_pXAudioDevice)
 	{
-		SAFE_RELEASE(m_pXAudioDevice);
-		CoUninitialize();
+		/*SAFE_RELEASE(m_pXAudioDevice);
+		CoUninitialize();*/
 	}
 }

@@ -4,13 +4,14 @@
 #include "Wrapper\Direct3D.h"
 #include "Wrapper\XAudio.h"
 #include "xaudio2.h"
-#include "GameObject\GameObject.h"
 #include <vector>
 
 class BaseState;
 class TextureManager;
 class Input;
 class CSGD_FModManager;
+class ModelManager;
+class GameObject;
 
 struct Profile
 {
@@ -24,9 +25,9 @@ private:
 	XAudio*				XAud;
 	XAUDIO2_BUFFER		audioBuffer;
 
+	ModelManager*		modelManager;
 	TextureManager*		textureManager;
 	Input*				input;
-	GameObject			gameObj;
 	CSGD_FModManager*	fmodManager;
 	
 	std::vector<BaseState*> gameStates;
@@ -48,6 +49,9 @@ private:
 	float SFXVolume;
 	float musicVolume;
 	Profile profile;
+
+	//Testing variables (delete later on)
+	GameObject *gameObj;
 
 	Game();
 	Game(const Game&);

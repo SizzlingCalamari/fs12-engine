@@ -40,6 +40,9 @@
     <Filter Include="GameState\Source Files">
       <UniqueIdentifier>{a528f243-f5e2-4219-80b3-ab35871fcea9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper\3D Engine">
+      <UniqueIdentifier>{e0cad3c8-9553-487b-8e93-482496f86340}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Game.cpp">
@@ -81,16 +84,22 @@
     <ClCompile Include="Source\GameObject\GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Helper\BaseShader.cpp">
-      <Filter>Helper</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Helper\Camera.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Helper\Mesh.cpp">
-      <Filter>Helper</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Wrapper\XAudio.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Helper\BaseShader.cpp">
+      <Filter>Helper\3D Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Helper\Mesh.cpp">
+      <Filter>Helper\3D Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Helper\Model.cpp">
+      <Filter>Helper\3D Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Wrapper\ModelManager.cpp">
       <Filter>Wrappers\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,13 +143,7 @@
     <ClInclude Include="Source\GameObject\GameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Helper\BaseShader.h">
-      <Filter>Helper</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Helper\Camera.h">
-      <Filter>Helper</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Helper\Mesh.h">
       <Filter>Helper</Filter>
     </ClInclude>
     <ClInclude Include="Source\Helper\Profile.h">
@@ -150,6 +153,18 @@
       <Filter>GameState\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Wrapper\XAudio.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Helper\BaseShader.h">
+      <Filter>Helper\3D Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Helper\Mesh.h">
+      <Filter>Helper\3D Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Helper\Model.h">
+      <Filter>Helper\3D Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\ModelManager.h">
       <Filter>Wrappers\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

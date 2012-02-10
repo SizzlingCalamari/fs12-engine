@@ -16,7 +16,7 @@ using std::string;
 
 const char* g_szWINDOW_CLASS_NAME	= "SGDWindowClass";	
 
-const char* g_szWINDOW_TITLE		= "MEDUSA";
+const char* g_szWINDOW_TITLE		= "FS12ENGINE";
 int	g_nWINDOW_WIDTH			= 800;				
 int	g_nWINDOW_HEIGHT		= 600;				
 

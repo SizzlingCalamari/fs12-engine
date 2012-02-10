@@ -4,7 +4,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
-struct TextureVertex
+struct VertexNormalTexture
 {
 	D3DXVECTOR3 position;
 	D3DXVECTOR3	normal;
@@ -17,17 +17,25 @@ public:
 	Mesh();
 	~Mesh();
 
-	void InitMesh(float width, float height, float horizontalSubDiv = 0, float verticalSubDiv = 0);
-	void Shutdown();
+	void InitMesh(const VertexNormalTexture *verts, unsigned int _numVerts, D3DPRIMITIVETYPE _primitiveType);
+	void InitIndexedMesh(const VertexNormalTexture *verts, int numVerts, const unsigned int *indices, int numIndices);
+	
+	void DestroyMesh();
 
 	IDirect3DVertexDeclaration9* GetVertexDeclaration() { return vertexDecl; }
-	IDirect3DIndexBuffer9* GetIndexBuffer() { return indexBuffer; }
-	IDirect3DVertexBuffer9* GetVertexBuffer() { return vertexBuffer; }
+	IDirect3DIndexBuffer9* GetIndexBuffer()				{ return indexBuffer; }
+	IDirect3DVertexBuffer9* GetVertexBuffer()			{ return vertexBuffer; }
+	unsigned int GetNumVerts()							{ return numVerts; }
 
 private:
-	IDirect3DVertexDeclaration9		*vertexDecl; // move to d3d
-	IDirect3DIndexBuffer9			*indexBuffer;	// use 1 and scale... build plane from -1 to 1 and scale.
+	IDirect3DVertexDeclaration9		*vertexDecl;
+	IDirect3DIndexBuffer9			*indexBuffer;
 	IDirect3DVertexBuffer9			*vertexBuffer;
+
+	unsigned int					numVerts;
+	D3DPRIMITIVETYPE				primitiveType;
+
+	int								textureID;
 };
 
 #endif

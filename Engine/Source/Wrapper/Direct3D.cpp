@@ -131,15 +131,15 @@ void Direct3D::EndDraw()
 
 void Direct3D::Shutdown()
 {
-	if(d3d)
-	{
-		d3d->Release();
-		d3d = NULL;
-	}
-
 	if(d3dDevice)
 	{
 		d3dDevice->Release();
 		d3dDevice = NULL;
+	}
+
+	if(d3d)
+	{
+		d3d->Release();
+		d3d = NULL;
 	}
 }
