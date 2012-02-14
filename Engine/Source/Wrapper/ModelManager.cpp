@@ -19,8 +19,6 @@ Model* ModelManager::LoadModel(char* fileName)
 
 #ifdef _DEBUG
 		// for debugging purposes I'll let you load obj's and other trashy formats =)
-		char extension[4] = {' ',' ',' ','\0'};
-
 		unsigned int count = 0;
 		while(true)
 		{

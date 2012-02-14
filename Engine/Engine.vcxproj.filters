@@ -57,9 +57,6 @@
     <ClCompile Include="Source\Wrapper\TextureManager.cpp">
       <Filter>Wrappers\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Wrapper\CSGD_FModManager.cpp">
-      <Filter>Wrappers\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Wrapper\Direct3D.cpp">
       <Filter>Wrappers\Source Files</Filter>
     </ClCompile>
@@ -87,9 +84,6 @@
     <ClCompile Include="Source\Helper\Camera.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Wrapper\XAudio.cpp">
-      <Filter>Wrappers\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Helper\BaseShader.cpp">
       <Filter>Helper\3D Engine</Filter>
     </ClCompile>
@@ -102,15 +96,15 @@
     <ClCompile Include="Source\Wrapper\ModelManager.cpp">
       <Filter>Wrappers\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Wrapper\AudioManager.cpp">
+      <Filter>Wrappers\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Wrapper\AnimationManager.h">
-      <Filter>Wrappers\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Wrapper\CSGD_FModManager.h">
       <Filter>Wrappers\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Wrapper\Direct3D.h">
@@ -152,9 +146,6 @@
     <ClInclude Include="Source\GameState\BaseState.h">
       <Filter>GameState\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Wrapper\XAudio.h">
-      <Filter>Wrappers\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Helper\BaseShader.h">
       <Filter>Helper\3D Engine</Filter>
     </ClInclude>
@@ -165,6 +156,9 @@
       <Filter>Helper\3D Engine</Filter>
     </ClInclude>
     <ClInclude Include="Source\Wrapper\ModelManager.h">
+      <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Wrapper\AudioManager.h">
       <Filter>Wrappers\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

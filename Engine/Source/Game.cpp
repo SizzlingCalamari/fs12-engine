@@ -5,6 +5,8 @@
 #include "Wrapper\ModelManager.h"
 #include "Wrapper\Input.h"
 #include "GameObject\GameObject.h"
+#include "Wrapper\AudioManager.h"
+
 
 #ifdef _DEBUG
 #include <iostream>
@@ -15,8 +17,6 @@ Game::Game()
 	D3D = NULL;
 	SFXVolume = 1.0f;
 	musicVolume = 1.0f;
-
-	ZeroMemory(&audioBuffer, sizeof(XAUDIO2_BUFFER));
 
 	isWindowed = true;
 
@@ -39,7 +39,7 @@ Game* Game::GetInstance()
 
 void Game::Initialize(HWND hwnd, HINSTANCE hInstance, int _windowWidth, int _windowHeight, bool _isWindowed, bool isVSync)
 {
-	XAud = XAudio::GetInstance();
+	audioManager = AudioManager::GetInstance();
 	D3D = Direct3D::GetInstance();
 	modelManager = ModelManager::GetInstance();
 	textureManager = TextureManager::GetInstance();
@@ -48,10 +48,12 @@ void Game::Initialize(HWND hwnd, HINSTANCE hInstance, int _windowWidth, int _win
 	windowWidth = _windowWidth;
 	windowHeight = _windowHeight;
 
-	XAud->InitXAudioDevice(XAud);
+	//XAud->InitXAudioDevice(XAud);
+	audioManager->Init();
+	audioManager->LoadSound("Resource\\Sounds\\Avicii - Levels.wav");
 	D3D->InitD3D(hwnd, windowWidth, windowHeight);
 
-	XAud->OpenFile(&audioBuffer, "Resource\\Sounds\\Avicii - Levels.wav");
+	//XAud->OpenFile(&audioBuffer, "Resource\\Sounds\\Avicii - Levels.wav");
 
 	gameObj = new GameObject();
 
@@ -66,9 +68,9 @@ bool Game::Main()
 		return false;
 
 	Update();
+	input->ClearKeys();
 
 	Render();
-
 	return true;
 }
 
@@ -78,10 +80,16 @@ bool Game::Input()
 		return false;
 
 	if(input->IsKeyDown('P'))
-		XAud->PlaySoundA();
+		audioManager->PlaySound(0);
 
-	if(input->IsKeyDown('S'))
-		XAud->StopSound();
+	/*if(input->IsKeyDown('S'))
+		audioManager->StopSound();*/
+
+	if(input->IsKeyDown('D'))
+		AudioManager::GetInstance()->Shutdown();
+
+	if(input->IsKeyDown('I'))
+		AudioManager::GetInstance()->Init();
 
 	return true;
 }
@@ -105,10 +113,11 @@ void Game::Shutdown()
 {	
 	delete gameObj;
 
-	if(XAud)
+	
+	if(audioManager)
 	{
-		XAud->Shutdown();
-		XAud = NULL;
+		audioManager->Shutdown();
+		audioManager = NULL;
 	}
 
 	if(modelManager)
