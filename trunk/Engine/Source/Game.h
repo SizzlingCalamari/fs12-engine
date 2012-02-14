@@ -1,10 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Wrapper\Direct3D.h"
-#include "Wrapper\XAudio.h"
-#include "xaudio2.h"
+
 #include <vector>
+#include "Wrapper\Direct3D.h"
 
 class BaseState;
 class TextureManager;
@@ -12,6 +11,7 @@ class Input;
 class CSGD_FModManager;
 class ModelManager;
 class GameObject;
+class AudioManager;
 
 struct Profile
 {
@@ -22,13 +22,10 @@ class Game
 private:
 	//Wrappers
 	Direct3D*			D3D;
-	XAudio*				XAud;
-	XAUDIO2_BUFFER		audioBuffer;
-
+	AudioManager*		audioManager;
 	ModelManager*		modelManager;
 	TextureManager*		textureManager;
 	Input*				input;
-	CSGD_FModManager*	fmodManager;
 	
 	std::vector<BaseState*> gameStates;
 

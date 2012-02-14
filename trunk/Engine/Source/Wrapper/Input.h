@@ -7,6 +7,7 @@ class Input
 {
 public:
 
+	void ClearKeys();
 	void RawKeyInput(RAWKEYBOARD& kb);
 	void RawMouseInput(RAWMOUSE& mouse);
 

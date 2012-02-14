@@ -7,6 +7,11 @@ Input* Input::GetInstance()
 	return &instance;
 }
 
+void Input::ClearKeys()
+{
+	ZeroMemory((void*)&keys,256);
+}
+
 void Input::RawKeyInput(RAWKEYBOARD& kb)
 {
 	if(kb.Message == WM_KEYDOWN)

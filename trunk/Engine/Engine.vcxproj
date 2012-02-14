@@ -39,8 +39,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Programmers API Windows\api\inc;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Programmers API Windows\api\lib;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Programmers API Win32\api\inc;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Programmers API Win32\api\lib;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -81,18 +81,19 @@
     <ClCompile Include="Source\Helper\BaseShader.cpp" />
     <ClCompile Include="Source\Helper\Camera.cpp" />
     <ClCompile Include="Source\Helper\Mesh.cpp" />
+    <ClCompile Include="Source\Helper\Model.cpp" />
     <ClCompile Include="Source\Messaging\Event.cpp" />
     <ClCompile Include="Source\Messaging\EventSystem.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
     <ClCompile Include="Source\Wrapper\AnimationManager.cpp" />
+    <ClCompile Include="Source\Wrapper\AudioManager.cpp" />
     <ClCompile Include="Source\Wrapper\BitmapFont.cpp" />
-    <ClCompile Include="Source\Wrapper\CSGD_FModManager.cpp" />
     <ClCompile Include="Source\Wrapper\Direct3D.cpp" />
     <ClCompile Include="Source\Wrapper\Input.cpp" />
+    <ClCompile Include="Source\Wrapper\ModelManager.cpp" />
     <ClCompile Include="Source\Wrapper\ObjectManager.cpp" />
     <ClCompile Include="Source\Wrapper\SGD_Math.cpp" />
     <ClCompile Include="Source\Wrapper\TextureManager.cpp" />
-    <ClCompile Include="Source\Wrapper\XAudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h" />
@@ -101,19 +102,20 @@
     <ClInclude Include="Source\Helper\BaseShader.h" />
     <ClInclude Include="Source\Helper\Camera.h" />
     <ClInclude Include="Source\Helper\Mesh.h" />
+    <ClInclude Include="Source\Helper\Model.h" />
     <ClInclude Include="Source\Helper\Profile.h" />
     <ClInclude Include="Source\Messaging\Event.h" />
     <ClInclude Include="Source\Messaging\EventSystem.h" />
     <ClInclude Include="Source\Messaging\Listener.h" />
     <ClInclude Include="Source\Wrapper\AnimationManager.h" />
+    <ClInclude Include="Source\Wrapper\AudioManager.h" />
     <ClInclude Include="Source\Wrapper\Bitmapfont.h" />
-    <ClInclude Include="Source\Wrapper\CSGD_FModManager.h" />
     <ClInclude Include="Source\Wrapper\Direct3D.h" />
     <ClInclude Include="Source\Wrapper\Input.h" />
+    <ClInclude Include="Source\Wrapper\ModelManager.h" />
     <ClInclude Include="Source\Wrapper\ObjectManager.h" />
     <ClInclude Include="Source\Wrapper\SGD_Math.h" />
     <ClInclude Include="Source\Wrapper\TextureManager.h" />
-    <ClInclude Include="Source\Wrapper\XAudio.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
