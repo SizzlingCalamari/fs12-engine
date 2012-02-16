@@ -43,6 +43,9 @@
     <Filter Include="Helper\3D Engine">
       <UniqueIdentifier>{e0cad3c8-9553-487b-8e93-482496f86340}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data Structures">
+      <UniqueIdentifier>{4ffcc690-55bc-438c-ae34-d0e6f5b247dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Game.cpp">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="Source\Wrapper\AudioManager.h">
       <Filter>Wrappers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Data Structures\Vector.h">
+      <Filter>Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
