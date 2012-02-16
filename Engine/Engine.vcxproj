@@ -96,6 +96,7 @@
     <ClCompile Include="Source\Wrapper\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Data Structures\Vector.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\GameObject\GameObject.h" />
     <ClInclude Include="Source\GameState\BaseState.h" />

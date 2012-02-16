@@ -30,7 +30,7 @@ void GameObject::Render()
 {
 	D3DXMATRIX matrix;
 
-	angle += 0.001;
+	angle += 0.001f;
 
 	D3DXMatrixIdentity(&matrix);
 
