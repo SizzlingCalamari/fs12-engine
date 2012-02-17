@@ -7,6 +7,8 @@
 #include "GameObject\GameObject.h"
 #include "Wrapper\AudioManager.h"
 
+// Included temporarily to make sure it is being built
+#include "Data Structures\Vector.h"
 
 #ifdef _DEBUG
 #include <iostream>
