@@ -182,16 +182,11 @@ namespace FS12
 		_Type*		m_pEnd;
 		_Type*		m_pCapacity;
 
-		size_type	m_Size;
-		size_type	m_Capacity;
-
-
 		void TidyUp()
 		{
 			free(m_pBegin);
 
 			m_pBegin = m_pEnd = NULL;
-			m_Size = m_Capacity = 0;
 		}
 
 		size_type MaxSize()
@@ -199,13 +194,14 @@ namespace FS12
 			_SIZT _Count = (_SIZT)(-1) / sizeof (_Type);
 			return (_Count > 0) ? (size_type)_Count : 1;
 		}
+
 	public:
 		// Constructors:
 		// Default Constructor
-		vector() : m_pBegin(NULL), m_pEnd(NULL), m_pCapacity(NULL), m_Size(0), m_Capacity(0) {}
+		vector() : m_pBegin(NULL), m_pEnd(NULL), m_pCapacity(NULL) {}
 
 		// Constructor with a default capacity
-		vector(size_type _capacity) : vector() { /*resize(_capacity);*/ }
+		vector(size_type _capacity) : vector() { resize(_capacity); }
 
 		~vector() { clear(); }
 
@@ -216,7 +212,6 @@ namespace FS12
 			free(m_pBegin);
 
 			m_pBegin = m_pEnd = NULL;
-			m_Size = m_Capacity = 0;
 		}
 
 		// Push Back
@@ -227,12 +222,11 @@ namespace FS12
 			
 			memcpy((void*)(m_pEnd), (void*)&(_data), sizeof(_Type));
 
-			++m_Size;
 			++m_pEnd;
 		}
 
-		size_type size() const { return m_Size; }
-		size_type capacity() const { return m_Capacity; }
+		size_type size() const { return (m_pEnd - m_pBegin); }
+		size_type capacity() const { return (m_pCapacity - m_pBegin); }
 
 		// Pop Back
 		//HRESULT pop_back();
@@ -269,31 +263,35 @@ namespace FS12
 		// Resize
 		void resize(size_type _capacity = 0)
 		{
-			if (_capacity && _capacity < m_Capacity)
+			size_type size = this->size();
+			size_type old_cap = capacity();
+
+			if (_capacity && _capacity < old_cap)
 				return; // TODO: Add code to downsize here
-			if (_capacity > m_Capacity)
-				m_Capacity = _capacity;
+			if (_capacity > old_cap)
+				old_cap = _capacity;
 			else if (!m_pBegin)
-				m_Capacity = 1;
-			else if ((m_Capacity * 2) >= MaxSize())
-				m_Capacity = MaxSize();
+				old_cap = 1;
+			else if ((old_cap * 2) >= MaxSize())
+				old_cap = MaxSize();
 			else
-				m_Capacity *= 2;
+				old_cap *= 2;
 
 			void* temp = NULL;
+
 			if (!m_pBegin)
-				m_pBegin = (_Type*)malloc(sizeof(_Type) * m_Capacity);
+				m_pBegin = (_Type*)malloc(sizeof(_Type) * old_cap);
 			else
 			{
-				temp = realloc(m_pBegin, sizeof(_Type) * m_Capacity);
+				temp = realloc(m_pBegin, sizeof(_Type) * old_cap);
 				if (!temp)
 					return;
 				else
 					m_pBegin = (_Type*)temp;
 			}
-
-			m_pEnd = (m_pBegin + m_Size);
-			m_pCapacity = (m_pBegin + m_Capacity);
+			
+			m_pEnd = (m_pBegin + size);
+			m_pCapacity = (m_pBegin + old_cap);
 		}
 
 		_Type& operator [] (const size_type _index) 
