@@ -32,10 +32,12 @@ class AudioManager
 public:
 	static AudioManager *GetInstance();
 
-	bool LoadSound(const char *_filename);
-	bool LoadWav(const char *_filename);
+	int LoadSound(char *_filename);
+	bool LoadWav(char *_filename);
 
 	void PlaySound(unsigned int i);
+
+	void UpdateFilters(float dt);
 
 	void Init();
 	void Shutdown();
@@ -47,6 +49,7 @@ protected:
 
 private:
 	vector<Sound> sounds;
+	map<char *, unsigned int> soundMap;
 
 	BYTE* dataBuffer;
 	unsigned int allocOffset;
@@ -54,9 +57,12 @@ private:
 	unsigned int maxAllocSize;
 	unsigned int currAllocSize;
 
-	IXAudio2* m_pXAudioDevice;
-	IXAudio2MasteringVoice* m_pXAudioMasterVoice;
-	IXAudio2SourceVoice* m_pXAudioSourceVoice;
+	IXAudio2* XAudioDevice;
+	IXAudio2MasteringVoice* XAudioMasterVoice;
+	IXAudio2SourceVoice* XAudioSourceVoice;
+
+	XAUDIO2_FILTER_PARAMETERS filterParams;
+	float elapsedTime;
 };
 
 #endif

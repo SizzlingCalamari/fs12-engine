@@ -1,6 +1,8 @@
 #include "ModelManager.h"
 #include "..\Helper\Model.h"
 
+Model* ModelManager::box = NULL;
+
 ModelManager* ModelManager::GetInstance()
 {
 	static ModelManager instance;
@@ -46,6 +48,17 @@ Model* ModelManager::LoadModel(char* fileName)
 	return NULL;
 }
 
+Model* ModelManager::CreateBox()
+{
+	if(box)
+		return box;
+
+	box = new Model();
+	box->CreateBox();
+
+	return box;
+}
+
 void ModelManager::Shutdown()
 {
 	
@@ -59,4 +72,11 @@ void ModelManager::Shutdown()
 	models.clear();
 
 	modelsMap.clear();
+
+	if(box)
+	{
+		box->DestroyModel();
+		delete box;
+		box = NULL;
+	}
 }

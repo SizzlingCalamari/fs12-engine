@@ -99,6 +99,7 @@ void Game::Update()
 	dt = (float)((startTimeStamp - previousTimeStamp) / 1000.0f);
 	previousTimeStamp = startTimeStamp;
 	totalElapsedTime += dt;
+	audioManager->UpdateFilters(dt);
 }
 
 void Game::Render()
@@ -109,10 +110,7 @@ void Game::Render()
 }
 
 void Game::Shutdown()
-{	
-	delete gameObj;
-
-	
+{		
 	if(audioManager)
 	{
 		audioManager->Shutdown();
@@ -136,6 +134,8 @@ void Game::Shutdown()
 		D3D->Shutdown();
 		D3D = NULL;
 	}
+
+	delete gameObj;
 }
 
 void Game::SetWindowSize( int _windowWidth, int _windowHeight )

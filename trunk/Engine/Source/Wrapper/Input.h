@@ -13,6 +13,7 @@ public:
 
 	bool IsKeyDown(char keyCode);
 	POINT GetCursorPosition();
+	POINT GetRelativeCursorPosition();
 
 	static Input *GetInstance();
 
@@ -25,6 +26,7 @@ private:
 	bool keys[256];
 
 	POINT cursorPosition;
+	POINT cursorRelPos;
 };
 
 #endif

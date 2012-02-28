@@ -13,7 +13,10 @@ GameObject::GameObject()
 	facingDir	= D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
 	position	= D3DXVECTOR3( 0.0f, 0.0f, -100.0f );
 
+	//model = ModelManager::GetInstance()->LoadModel("Resource\\Models\\OBJ\\Primitives\\Box.obj");
 	model = ModelManager::GetInstance()->LoadModel("Resource\\Models\\OBJ\\H2.obj");
+	//model = ModelManager::GetInstance()->CreateBox();
+	texID = TextureManager::GetInstance()->LoadTexture("Resource\\Texture\\Crate.jpg");
 }
 
 GameObject::~GameObject()
@@ -30,7 +33,7 @@ void GameObject::Render()
 {
 	D3DXMATRIX matrix;
 
-	angle += 0.001f;
+	angle += 0.002f;
 
 	D3DXMatrixIdentity(&matrix);
 
