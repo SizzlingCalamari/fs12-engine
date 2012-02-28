@@ -153,8 +153,9 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 		case WM_DESTROY: 
 		{
-			//	Kill the application			
-			PostQuitMessage(0);
+			//	Kill the application
+			
+			PostQuitMessage(0); //killing the app
 			return(0);
 		}
 		break;

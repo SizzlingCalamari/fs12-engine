@@ -15,7 +15,10 @@ public:
 	static BaseShader* GetInstance();
 
 	void InitShader(LPCSTR _fileName);
-	void Render(D3DXMATRIX &_matrix, Model *model);
+	void Render(D3DXMATRIX& _matrix, Model* model);
+	void RenderIndexed(D3DXMATRIX& _matrix, Model* model);
+	void Render(D3DXMATRIX& _matrix, Model* model, int textureID);
+	void RenderIndexed(D3DXMATRIX &_matrix, Model *model, int textureID);
 	void ShutdownShader();
 
 private:

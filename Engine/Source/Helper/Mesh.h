@@ -26,6 +26,7 @@ public:
 	IDirect3DIndexBuffer9* GetIndexBuffer()				{ return indexBuffer; }
 	IDirect3DVertexBuffer9* GetVertexBuffer()			{ return vertexBuffer; }
 	unsigned int GetNumVerts()							{ return numVerts; }
+	unsigned int GetNumPrimitives()						{ return numPrimitives; }
 
 private:
 	IDirect3DVertexDeclaration9		*vertexDecl;
@@ -33,6 +34,7 @@ private:
 	IDirect3DVertexBuffer9			*vertexBuffer;
 
 	unsigned int					numVerts;
+	unsigned int					numPrimitives;
 	D3DPRIMITIVETYPE				primitiveType;
 
 	int								textureID;

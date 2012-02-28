@@ -1,14 +1,16 @@
 #include "AudioManager.h"
+#include "Input.h"
 
 AudioManager::AudioManager()
 {
 	dataBuffer				= NULL;
-	m_pXAudioDevice			= NULL;
-	m_pXAudioMasterVoice	= NULL;
-	m_pXAudioSourceVoice	= NULL;
+	XAudioDevice			= NULL;
+	XAudioMasterVoice		= NULL;
+	XAudioSourceVoice		= NULL;
 
 	maxAllocSize			= AUDIO_LIB_SIZE*1024*1024; // amount of memory to allocate for audio
 	allocOffset				= 0;
+	elapsedTime				= 0.0f;
 }
 
 AudioManager::~AudioManager()
@@ -23,42 +25,54 @@ AudioManager* AudioManager::GetInstance()
 
 void AudioManager::Init()
 {
-	if(!m_pXAudioDevice)
+	if(!XAudioDevice)
 	{
-		if(XAudio2Create(&m_pXAudioDevice, XAUDIO2_DEBUG_ENGINE, XAUDIO2_DEFAULT_PROCESSOR)) // create the audio device ??DEBUG?? will look into that
+		if(XAudio2Create(&XAudioDevice, XAUDIO2_DEBUG_ENGINE, XAUDIO2_DEFAULT_PROCESSOR)) // create the audio device ??DEBUG?? will look into that
 			MessageBox(0,"FAILED TO CREATE AUDIO DEVICE",0,0);
 	}
-	if(!m_pXAudioMasterVoice)
+	if(!XAudioMasterVoice)
 	{
-		if(m_pXAudioDevice->CreateMasteringVoice(&m_pXAudioMasterVoice)) // Master Voice serves as a mixing master for all subvoices
+		if(XAudioDevice->CreateMasteringVoice(&XAudioMasterVoice)) // Master Voice serves as a mixing master for all subvoices
 			MessageBox(0,"FAILED TO CREATE AUDIO MASTER VOICE",0,0);
 	}
 	if(!dataBuffer)
 		dataBuffer = (BYTE*)malloc(maxAllocSize); // allocate enough memory to allocate our audio library
 }
 
-bool AudioManager::LoadSound(const char *_filename)
+int AudioManager::LoadSound(char *_filename)
 {
-	unsigned int count = 0;
-	while(true)
+	map<char*, unsigned int>::iterator it;
+	
+	it = soundMap.find(_filename);
+
+	if (it == soundMap.end())
 	{
-		if(_filename[count] == '.')
+		unsigned int count = 0;
+
+		while(true)
 		{
+			if(_filename[count] == '.')
+			{
+				count++;
+				break;
+			}
 			count++;
-			break;
 		}
-		count++;
-	}
 
-	if(!strcmp(_filename+count, "wav") || !strcmp(_filename+count, "WAV"))
-		return LoadWav(_filename);
+		if(!strcmp(_filename+count, "wav") || !strcmp(_filename+count, "WAV"))
+			if(!LoadWav(_filename))
+				return -1;
 
-	//should probably load .ogg's for compressed audio
+		//should probably load .ogg's for compressed audio
+
+		return sounds.size()-1;
+	}else
+		return it->second;
 
 	return false;
 }
 
-bool AudioManager::LoadWav(const char *_filename)
+bool AudioManager::LoadWav(char *_filename)
 {
 	WAVEFORMATEXTENSIBLE wfx = {0};
 	//Open the file
@@ -112,25 +126,48 @@ bool AudioManager::LoadWav(const char *_filename)
 void AudioManager::PlaySound(unsigned int i)
 {
 	//shouldn't create a new source voice it's already created
-	if(m_pXAudioDevice->CreateSourceVoice(&m_pXAudioSourceVoice, (WAVEFORMATEX*)&sounds[i].wfx))
+	if(XAudioDevice->CreateSourceVoice(&XAudioSourceVoice, (WAVEFORMATEX*)&sounds[i].wfx,XAUDIO2_VOICE_USEFILTER))
 		MessageBox(0,"FAILED TO CREATE SOURCE VOICE","FAILED TO PLAY SOUND",0);
 
+	filterParams.Frequency = 0.1f;
+	filterParams.OneOverQ = 0.1f;
+    filterParams.Type = LowPassFilter;
+
+	XAudioSourceVoice->SetFilterParameters(&filterParams, XAUDIO2_COMMIT_NOW);
+
 	//should check to see if the sound is already playing beffor queueing it up
-	if(m_pXAudioSourceVoice->SubmitSourceBuffer(sounds[i].buffer))
+	if(XAudioSourceVoice->SubmitSourceBuffer(sounds[i].buffer))
 		MessageBox(0,"FAILED TO SUBMIT BUFFER","FAILED TO PLAY SOUND",0);
 
 	//should check if it's already playing before starting it again
-	if(m_pXAudioSourceVoice->Start(0, XAUDIO2_COMMIT_NOW))
+	if(XAudioSourceVoice->Start(0, XAUDIO2_COMMIT_NOW))
 		MessageBox(0,"FAILED TO START SOURCE VOICE","FAILED TO PLAY SOUND",0);
+}
+
+void AudioManager::UpdateFilters(float dt)
+{
+	if(XAudioSourceVoice)
+	{
+		elapsedTime+=dt*0.25f;
+
+		filterParams.Frequency += ((float)Input::GetInstance()->GetRelativeCursorPosition().y)*0.001f;
+		if(filterParams.Frequency <= 0.0f)
+			filterParams.Frequency = 0.01f;
+		else if(filterParams.Frequency > XAUDIO2_MAX_FILTER_FREQUENCY)
+			filterParams.Frequency = XAUDIO2_MAX_FILTER_FREQUENCY;
+		filterParams.OneOverQ = 0.5f;
+		filterParams.Type = LowPassFilter;
+		XAudioSourceVoice->SetFilterParameters(&filterParams, XAUDIO2_COMMIT_NOW);
+	}
 }
 
 void AudioManager::Shutdown()
 {
-	if(m_pXAudioSourceVoice)
+	if(XAudioSourceVoice)
 	{
-		m_pXAudioSourceVoice->Stop(0);
-		m_pXAudioSourceVoice->DestroyVoice();
-		m_pXAudioSourceVoice = NULL;
+		XAudioSourceVoice->Stop(0);
+		XAudioSourceVoice->DestroyVoice();
+		XAudioSourceVoice = NULL;
 	}
 
 	for(unsigned int i = 0; i<sounds.size(); ++i)
@@ -141,15 +178,15 @@ void AudioManager::Shutdown()
 		free(dataBuffer);
 		dataBuffer = NULL;
 	}
-	if(m_pXAudioMasterVoice)
+	if(XAudioMasterVoice)
 	{
-		m_pXAudioMasterVoice->DestroyVoice();
-		m_pXAudioMasterVoice = NULL;
+		XAudioMasterVoice->DestroyVoice();
+		XAudioMasterVoice = NULL;
 	}
-	if(m_pXAudioDevice)
+	if(XAudioDevice)
 	{
-		m_pXAudioDevice->Release();
-		m_pXAudioDevice = NULL;
+		XAudioDevice->Release();
+		XAudioDevice = NULL;
 
 		CoUninitialize();
 	}

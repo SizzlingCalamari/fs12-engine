@@ -9,8 +9,6 @@ using std::vector;
 
 class Mesh;
 
-enum PrimitiveType { PLANE, BOX, SPHERE };
-
 class Model
 {
 public:
@@ -20,7 +18,7 @@ public:
 	void LoadModel(const char* const filename);
 	void LoadObjModel(const char* const filename);
 
-	void CreatePrimitive(PrimitiveType type);
+	void CreateBox();
 
 	Mesh* GetMesh(unsigned int i);
 	unsigned int GetMeshCount() { return meshVec.size(); }

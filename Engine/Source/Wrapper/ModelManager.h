@@ -10,6 +10,7 @@ class ModelManager
 public:
 	static ModelManager* GetInstance();
 	Model* LoadModel(char* fileName);
+	Model* CreateBox();
 	void Shutdown();
 
 private:
@@ -23,6 +24,8 @@ private:
 	// holds a string with the filename and an int to index into our texture array
 	std::map<char*, int> modelsMap;
 	std::vector<Model*> models;
+
+	static Model* box;
 };
 
 #endif
