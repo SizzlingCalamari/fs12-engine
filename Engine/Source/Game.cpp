@@ -67,7 +67,7 @@ bool Game::Main()
 		return false;
 
 	Update();
-	input->ClearKeys();
+	//input->ClearKeys();
 
 	Render();
 	return true;
@@ -75,19 +75,19 @@ bool Game::Main()
 
 bool Game::Input()
 {
-	if(input->IsKeyDown('Q'))
+	if(input->KeyPressed('Q'))
 		return false;
 
-	if(input->IsKeyDown('P'))
+	if(input->KeyPressed('P'))
 		audioManager->PlaySound(0);
 
 	/*if(input->IsKeyDown('S'))
 		audioManager->StopSound();*/
 
-	if(input->IsKeyDown('D'))
+	if(input->KeyDown('D'))
 		AudioManager::GetInstance()->Shutdown();
 
-	if(input->IsKeyDown('I'))
+	if(input->KeyDown('I'))
 		AudioManager::GetInstance()->Init();
 
 	return true;
