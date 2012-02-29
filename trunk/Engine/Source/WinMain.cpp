@@ -314,7 +314,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//	Enter main event loop
 	while (TRUE)
 	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{ 
 			//	Test if this is a quit
 			if (msg.message == WM_QUIT)

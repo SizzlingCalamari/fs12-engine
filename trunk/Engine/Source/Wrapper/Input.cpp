@@ -9,7 +9,7 @@ Input* Input::GetInstance()
 
 void Input::ClearKeys()
 {
-	ZeroMemory((void*)&keys,256);
+	ZeroMemory((void*)&keys,sizeof(Key)*256);
 
 	cursorRelPos.x = 0;
 	cursorRelPos.y = 0;
@@ -18,9 +18,20 @@ void Input::ClearKeys()
 void Input::RawKeyInput(RAWKEYBOARD& kb)
 {
 	if(kb.Message == WM_KEYDOWN)
-		keys[kb.VKey] = true;
+	{
+		if(keys[kb.VKey].down)
+		{
+			++keys[kb.VKey].repetitions;
+			return;
+		}
+
+		keys[kb.VKey].down = true;
+	}
 	if(kb.Message == WM_KEYUP)
-		keys[kb.VKey] = false;
+	{
+		keys[kb.VKey].down = false;
+		keys[kb.VKey].repetitions = 0;
+	}
 }
 
 void Input::RawMouseInput(RAWMOUSE& mouse)
@@ -32,9 +43,14 @@ void Input::RawMouseInput(RAWMOUSE& mouse)
 	cursorPosition.y+=mouse.lLastY;
 }
 
-bool Input::IsKeyDown(char keyCode)
+bool Input::KeyDown(char _keyCode)
 {
-	return keys[keyCode];
+	return keys[_keyCode].down;
+}
+
+bool Input::KeyPressed(char _keyCode)
+{
+	return keys[_keyCode].down && !keys[_keyCode].repetitions++;
 }
 
 POINT Input::GetCursorPosition()

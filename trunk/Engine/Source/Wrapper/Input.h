@@ -3,6 +3,14 @@
 
 #include <Windows.h>
 
+struct Key
+{
+	Key() : down(false), repetitions(0) {};
+	bool down;
+	unsigned int repetitions;
+	// something here to handle events (string, function call, anything)
+};
+
 class Input
 {
 public:
@@ -11,7 +19,8 @@ public:
 	void RawKeyInput(RAWKEYBOARD& kb);
 	void RawMouseInput(RAWMOUSE& mouse);
 
-	bool IsKeyDown(char keyCode);
+	bool KeyDown(char _keyCode);
+	bool KeyPressed(char _keyCode);
 	POINT GetCursorPosition();
 	POINT GetRelativeCursorPosition();
 
@@ -23,7 +32,9 @@ private:
 	Input(Input &ref);
 	Input &operator=(Input &ref);
 
-	bool keys[256];
+	Key keys[256];
+	unsigned int startTime;
+	unsigned int endTime;
 
 	POINT cursorPosition;
 	POINT cursorRelPos;

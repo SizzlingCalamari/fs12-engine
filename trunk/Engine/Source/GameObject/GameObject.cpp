@@ -14,8 +14,8 @@ GameObject::GameObject()
 	position	= D3DXVECTOR3( 0.0f, 0.0f, -100.0f );
 
 	//model = ModelManager::GetInstance()->LoadModel("Resource\\Models\\OBJ\\Primitives\\Box.obj");
-	model = ModelManager::GetInstance()->LoadModel("Resource\\Models\\OBJ\\H2.obj");
-	//model = ModelManager::GetInstance()->CreateBox();
+	//model = ModelManager::GetInstance()->LoadModel("Resource\\Models\\OBJ\\H2.obj");
+	model = ModelManager::GetInstance()->CreateBox();
 	texID = TextureManager::GetInstance()->LoadTexture("Resource\\Texture\\Crate.jpg");
 }
 
@@ -31,15 +31,20 @@ void GameObject::Init()
 
 void GameObject::Render()
 {
-	D3DXMATRIX matrix;
+	D3DXMATRIX matrix, translate, rotateX, rotateY;
 
-	angle += 0.002f;
+	angle += 0.0001f;
 
 	D3DXMatrixIdentity(&matrix);
 
-	D3DXMatrixRotationY(&matrix, D3DXToRadian(angle));
+	D3DXMatrixTranslation(&translate, 100.0f, 0.0f, 0.0f);
+	D3DXMatrixRotationY(&rotateY, angle);
+	D3DXMatrixRotationX(&rotateX, angle);
 
-	BaseShader::GetInstance()->Render(matrix, model);
+	D3DXMatrixMultiply(&matrix, &matrix, &rotateX);
+	D3DXMatrixMultiply(&matrix, &matrix, &rotateY);
+
+	BaseShader::GetInstance()->RenderIndexed(matrix, model, texID);
 }
 
 void GameObject::Update(float _dt)

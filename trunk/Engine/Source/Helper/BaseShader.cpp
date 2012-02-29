@@ -17,7 +17,7 @@ BaseShader::BaseShader()
 	}
 
 	myCamera.BuildPerspective(D3DX_PI/3, (float)(800.0f/600.0f), 0.1f, 1000.0f);
-	myCamera.SetViewPosition(0.0f, 0.0f, -300.0f);
+	myCamera.SetViewPosition(0.0f, 0.0f, -10.0f);
 }
 
 BaseShader::~BaseShader()

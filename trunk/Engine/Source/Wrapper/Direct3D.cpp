@@ -119,7 +119,7 @@ void Direct3D::ChangeDisplayMode(int horizontalRes, int verticalRes, bool window
 
 void Direct3D::BeginDraw()
 {
-	d3dDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(255,0,255), 1.0f, 0);
+	d3dDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0,0,0), 1.0f, 0);
 	d3dDevice->BeginScene();
 }
 

@@ -135,7 +135,7 @@ void Model::LoadObjModel(const char* const filename)
 	}
 	
 	meshVec.push_back(new Mesh);
-	meshVec[objCount]->InitMesh(&finalVerts[0], finalVerts.size(), D3DPT_TRIANGLELIST);
+	meshVec[objCount]->InitMesh(&finalVerts[0], finalVerts.size(), D3DPT_TRIANGLESTRIP);
 }
 
 void Model::CreateBox()
