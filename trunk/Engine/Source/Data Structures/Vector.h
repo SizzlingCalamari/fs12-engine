@@ -298,6 +298,5 @@ namespace FS12
 		{ 
 			return *(m_pBegin + _index);
 		}
-
 	};
 };

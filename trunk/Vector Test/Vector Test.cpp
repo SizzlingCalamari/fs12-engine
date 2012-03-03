@@ -20,7 +20,6 @@ int main()
 		int_vec.push_back(rand() % 100 + 1);
 	}
 
-
 	cout << "int_vec.size() = " << int_vec.size() << endl << "int_vec.capacity() = " << int_vec.capacity() << endl;
 
 	system("pause");
