@@ -229,11 +229,27 @@ namespace FS12
 		size_type capacity() const { return (m_pCapacity - m_pBegin); }
 
 		// Pop Back
-		//HRESULT pop_back();
+		void pop_back()
+		{
+
+		}
 		// Insert
-		//HRESULT insert(_Type& _data, iterator location);
-		//HRESULT insert(_Type& _data, c_iterator location);
-		//HRESULT insert(_Type& _data, int location);
+		void insert(_Type& _data, c_iterator location)
+		{
+			insert(_data, (iterator)c_iterator);
+		}
+
+		void insert(_Type& _data, int location)
+		{
+			insert(_data, iterator(m_pBegin + location));
+		}
+
+		void insert(_Type& _data, iterator location)
+		{
+			return;
+		}
+
+		
 		// Reserve
 
 		// Append
