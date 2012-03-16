@@ -8,6 +8,8 @@ using std::endl;
 
 #include <ctime>
 
+#include <vector>
+
 int main()
 {
 	srand(unsigned int(time(0)));
@@ -15,10 +17,14 @@ int main()
 
 	vector<int> int_vec;
 
+	std::vector<int> int_stdvec;
+
 	for (unsigned int i = 0; i < 50; ++i)
 	{
 		int_vec.push_back(rand() % 100 + 1);
 	}
+
+	int_stdvec.pop_back();
 
 	cout << "int_vec.size() = " << int_vec.size() << endl << "int_vec.capacity() = " << int_vec.capacity() << endl;
 
